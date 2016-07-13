@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+	
+	<head>
+		
+		<title>Index Query</title>
+		<meta charset = "UTF-8" />
+		
+	</head>
+	
+	<body>
+		
+		<table border="1">
+			
+			<tr>
+				
+				<td>Key</td>
+				
+				<td><input type="text" id="textKey" /></td>
+				
+			</tr>
+			
+			<tr>
+				
+				<td>Value</td>
+				
+				<td><input type="text" id="textValue" /></td>
+				
+			</tr>
+			
+			<tr>
+				
+				<td colspan="2">
+					
+					<input type="button" value="Add Key" onclick="setKey" />
+					
+					<input type="button" value="Retrieve Key" onclick="getInfo" />
+					
+					<input type="button" value="Clear Text" onclick="clear" />
+				
+				</td>
+				
+			</tr>
+			
+		</table>
+		
+		<script type="text/javascript">
+			
+			function setKey() {
+				var informationObject = {};
+				
+				informationObject.key = document.getElementById("textKey").value;
+				informationObject.value = document.getElementById("textValue").value;
+				
+				var jsonString = JSON.stringify(informationObject);
+				
+				document.cookie = "cookieObject=" +  jsonString;
+			}
+			
+			function getInfo() {
+				var keyArray = document.cookie.split("=");
+				
+				var individualKey = JSON.parse(keyArray[1]);
+				
+				document.getElementById("textKey").value = individualKey.key;
+				document.getElementById("textValue").value = individualKey.value;
+			}
+			
+			function clear() {
+				document.getElementById("textKey").value = "";
+				document.getElementById("textValue").value = "";
+			}
+	
+		</script>
+		
+	</body>
+	
+</html>
